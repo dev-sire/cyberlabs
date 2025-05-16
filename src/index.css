@@ -1,0 +1,122 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 246 84% 75%;
+    --primary-foreground: 240 5.9% 10%;
+    
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-cyber-dark text-cyber-light antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSI4IiBzdHJva2U9IiMzM0MzRjAiIHN0cm9rZS13aWR0aD0iMiIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjMiIGZpbGw9IiMzM0MzRjAiLz48L3N2Zz4="), auto;
+  }
+
+  a, button{
+    cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSI4IiBmaWxsPSIjMzNDM0YwIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjQiIGZpbGw9IiMzM0MzRjAiLz48L3N2Zz4="), pointer;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  ::selection {
+    @apply bg-cyber-purple/20 text-cyber-light;
+  }
+}
+
+@layer components {
+  .cyber-link {
+    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-cyber-purple after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+  }
+  
+  .cyber-card {
+    @apply bg-gradient-to-br from-cyber-dark to-slate-900 p-6 rounded-lg border border-cyber-purple/20 transition-all duration-300 hover:shadow-lg hover:shadow-cyber-purple/10 hover:border-cyber-purple/40;
+  }
+  
+  .cyber-button {
+    @apply relative overflow-hidden bg-cyber-purple/10 border border-cyber-purple/40 text-cyber-light px-6 py-2 rounded-md transition-all duration-300 hover:bg-cyber-purple/20 hover:shadow-md hover:shadow-cyber-purple/20;
+  }
+  
+  .cyber-button::after {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-cyber-purple/0 via-cyber-purple/30 to-cyber-purple/0 -translate-x-full transition-transform duration-500 ease-in-out;
+  }
+  
+  .cyber-button:hover::after {
+    @apply translate-x-full;
+  }
+  
+  .cyber-input {
+    @apply bg-cyber-dark/50 border border-cyber-purple/30 text-cyber-light rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-cyber-purple/50 focus:border-cyber-purple/50 transition-all duration-300;
+  }
+  
+  .reveal {
+    @apply opacity-0 transition-opacity duration-700;
+  }
+  
+  .reveal.active {
+    @apply opacity-100;
+  }
+  
+  .cyber-gradient-text {
+    @apply bg-gradient-to-r from-cyber-purple to-cyber-blue bg-clip-text text-transparent animate-text-gradient bg-[length:200%_auto];
+  }
+  
+  .cyber-grid-bg {
+    @apply bg-cyber-grid bg-cyber-grid;
+  }
+}
+
+@layer utilities {
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+}
