@@ -32,8 +32,9 @@ const projects = [
 
 const FeaturedProjects = () => {
   return (
-    <section className="py-20 px-4">
-      <div className="container mx-auto">
+    <section className="py-20 px-4 bg-cyber-dark relative">
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-cyber-dark to-cyber-dark/95 z-10"></div>
+      <div className="container mx-auto relative z-20">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
           <div>
             <h2 className="text-3xl font-bold mb-4 reveal">Featured Projects</h2>

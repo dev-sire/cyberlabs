@@ -5,6 +5,7 @@ import { Menu, X, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -81,22 +82,23 @@ const Header = () => {
           </Button>
         )}
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - Slide from side */}
         {isMobile && (
           <div
             className={cn(
-              'fixed inset-0 bg-cyber-dark/95 backdrop-blur-md flex flex-col justify-center items-center transition-all duration-300 z-40',
-              isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+              'fixed top-0 right-0 bottom-0 w-64 bg-cyber-dark/95 backdrop-blur-md flex flex-col transition-all duration-300 z-40 shadow-lg shadow-cyber-purple/10',
+              isMenuOpen ? 'translate-x-0' : 'translate-x-full'
             )}
+            style={{ paddingTop: '4rem' }} /* Add padding to account for navbar height */
           >
-            <nav className="flex flex-col items-center space-y-8">
+            <nav className="flex flex-col items-center space-y-8 h-full overflow-y-auto py-8 w-full px-6">
               {navItems.map((item, index) => (
                 <Link
                   key={item.title}
                   to={item.path}
                   onClick={toggleMenu}
                   className={cn(
-                    'cyber-link text-xl text-cyber-light hover:text-cyber-purple transition-colors duration-300',
+                    'cyber-link text-xl text-cyber-light hover:text-cyber-purple transition-colors duration-300 w-full text-center',
                     isMenuOpen && 'animate-fade-up',
                   )}
                   style={{ animationDelay: `${index * 100 + 100}ms` }}

@@ -45,11 +45,6 @@
   body {
     @apply bg-cyber-dark text-cyber-light antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
-    cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSI4IiBzdHJva2U9IiMzM0MzRjAiIHN0cm9rZS13aWR0aD0iMiIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjMiIGZpbGw9IiMzM0MzRjAiLz48L3N2Zz4="), auto;
-  }
-
-  a, button{
-    cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSI4IiBmaWxsPSIjMzNDM0YwIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjQiIGZpbGw9IiMzM0MzRjAiLz48L3N2Zz4="), pointer;
   }
   
   html {
@@ -58,6 +53,36 @@
   
   ::selection {
     @apply bg-cyber-purple/20 text-cyber-light;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-cyber-dark/50;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-cyber-purple/40 rounded-full hover:bg-cyber-purple/60 transition-colors;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  
+  ::-webkit-scrollbar-corner {
+    @apply bg-cyber-dark/50;
+  }
+
+  /* Circuit animations */
+  @keyframes circuit-pulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+  }
+
+  .circuit-line {
+    animation: circuit-pulse 4s infinite;
   }
 }
 
@@ -100,6 +125,19 @@
   
   .cyber-grid-bg {
     @apply bg-cyber-grid bg-cyber-grid;
+  }
+
+  /* Custom scrollbar styling for Radix ScrollArea */
+  .custom-scrollbar [data-radix-scroll-area-viewport] {
+    @apply overflow-hidden !important;
+  }
+  
+  .custom-scrollbar [data-radix-scroll-area-scrollbar] {
+    @apply flex touch-none select-none bg-transparent transition-colors;
+  }
+  
+  .custom-scrollbar [data-radix-scroll-area-thumb] {
+    @apply relative flex-1 rounded-full bg-cyber-purple/40 hover:bg-cyber-purple/60 transition-colors;
   }
 }
 

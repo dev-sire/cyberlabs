@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import CursorTrail from '../CursorTrial';
 
 interface MainLayoutProps {
@@ -34,7 +33,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   }, []);
   
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
       <CursorTrail />
       <Header />
       <main className="flex-grow pt-16">

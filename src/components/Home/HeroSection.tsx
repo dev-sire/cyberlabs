@@ -4,6 +4,7 @@ import { ArrowRight, Shield, Lock, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
+// Particles animation component
 const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -102,12 +103,106 @@ const ParticleBackground = () => {
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
 };
 
+// Circuit board animation for sides
+const CircuitBoardAnimation = () => {
+  return (
+    <div className="hidden lg:block absolute inset-y-0 w-52 pointer-events-none">
+      <div className="left-0 absolute top-1/4 left-4 opacity-20">
+        <div className="circuit-line w-24 h-0.5 bg-cyber-purple mb-8 relative">
+          <div className="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-cyber-purple animate-pulse" />
+          <div className="absolute w-0.5 h-16 bg-cyber-purple right-0 top-0" />
+        </div>
+        <div className="circuit-line w-16 h-0.5 bg-cyber-blue relative ml-8 mb-12">
+          <div className="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-cyber-blue animate-pulse" />
+        </div>
+        <div className="circuit-line w-32 h-0.5 bg-cyber-purple relative">
+          <div className="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-cyber-purple animate-pulse" />
+          <div className="absolute w-0.5 h-24 bg-cyber-purple right-0 top-0" />
+        </div>
+      </div>
+      <div className="right-0 absolute top-1/3 right-4 opacity-20">
+        <div className="circuit-line w-24 h-0.5 bg-cyber-blue mb-8 relative">
+          <div className="absolute -left-1 -top-1 w-2 h-2 rounded-full bg-cyber-blue animate-pulse" />
+          <div className="absolute w-0.5 h-16 bg-cyber-blue left-0 top-0" />
+        </div>
+        <div className="circuit-line w-16 h-0.5 bg-cyber-purple relative mr-8 mb-12">
+          <div className="absolute -left-1 -top-1 w-2 h-2 rounded-full bg-cyber-purple animate-pulse" />
+        </div>
+        <div className="circuit-line w-32 h-0.5 bg-cyber-blue relative">
+          <div className="absolute -left-1 -top-1 w-2 h-2 rounded-full bg-cyber-blue animate-pulse" />
+          <div className="absolute w-0.5 h-24 bg-cyber-blue left-0 top-0" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Code matrix animation
+const CodeMatrix = () => {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    const chars = "01";
+    const fontSize = 10;
+    let columns: number;
+    let drops: number[];
+    let animationFrameId: number;
+    
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      columns = Math.floor(canvas.width / fontSize);
+      drops = Array(columns).fill(1);
+    };
+    
+    const draw = () => {
+      ctx.fillStyle = "rgba(26, 31, 44, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = "#9b87f5";
+      ctx.font = `${fontSize}px monospace`;
+      
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        
+        drops[i]++;
+      }
+      
+      animationFrameId = requestAnimationFrame(draw);
+    };
+    
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    draw();
+    
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, []);
+  
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-30" />;
+};
+
 const HeroSection = () => {
   return (
-    <div className="relative overflow-hidden flex items-center min-h-screen"> {/* Changed h-screen to min-h-screen */}
+    <div className="relative overflow-hidden min-h-screen flex items-center">
       <ParticleBackground />
+      <CodeMatrix />
+      <CircuitBoardAnimation />
       <div className="cyber-grid-bg absolute inset-0 opacity-20 animate-grid-flow"></div>
-      <div className="container mx-auto px-4 z-10 pt-16 pb-24"> {/* Added pb-24 for extra bottom padding on mobile */}
+      <div className="container mx-auto px-4 z-10 pt-16">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-6 flex justify-center">
             <div className="p-3 bg-cyber-purple/10 rounded-full border border-cyber-purple/30 animate-pulse-glow">
@@ -119,7 +214,7 @@ const HeroSection = () => {
             <span className="cyber-gradient-text"> innovative research</span>
           </h1>
           <p className="text-xl text-cyber-light/80 mb-8 md:px-12 animate-fade-in delay-200">
-            CyberLabs is a cutting-edge research center dedicated to advancing the field of cybersecurity
+            CyberLabs is a cutting-edge research center dedicated to advancing the field of cybersecurity 
             through interdisciplinary collaboration and groundbreaking research.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in delay-300">
@@ -137,9 +232,9 @@ const HeroSection = () => {
             </Link>
           </div>
         </div>
-
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
-          <div className="cyber-card flex flex-col items-center text-center">
+        
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 reveal mb-16">
+          <div className="cyber-card flex flex-col items-center text-center pb-8">
             <div className="bg-cyber-purple/20 p-3 rounded-full mb-4">
               <Shield className="h-8 w-8 text-cyber-purple" />
             </div>
@@ -148,8 +243,8 @@ const HeroSection = () => {
               Advanced threat analysis and predictive models to identify emerging security risks.
             </p>
           </div>
-
-          <div className="cyber-card flex flex-col items-center text-center">
+          
+          <div className="cyber-card flex flex-col items-center text-center pb-8">
             <div className="bg-cyber-purple/20 p-3 rounded-full mb-4">
               <Lock className="h-8 w-8 text-cyber-purple" />
             </div>
@@ -158,8 +253,8 @@ const HeroSection = () => {
               Building systems and frameworks that safeguard user privacy without compromising functionality.
             </p>
           </div>
-
-          <div className="cyber-card flex flex-col items-center text-center">
+          
+          <div className="cyber-card flex flex-col items-center text-center pb-8">
             <div className="bg-cyber-purple/20 p-3 rounded-full mb-4">
               <Database className="h-8 w-8 text-cyber-purple" />
             </div>
@@ -170,6 +265,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-cyber-dark to-transparent"></div>
     </div>
   );
 };
