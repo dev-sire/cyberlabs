@@ -93,7 +93,7 @@ const Footer = () => {
           <p className="text-cyber-light/60 text-xs text-center md:text-left">
             © {currentYear} CyberLabs. All rights reserved.
           </p>
-          <div className="text-cyber-light/60">Developed by the DUET ACM SIGSAC</div>
+          <div className="text-cyber-light/60 text-xs"><a href='https://github.com/ACM-SIGSAC'>Developed with passion by Duet ACM SIGSAC</a></div>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-cyber-light/60 hover:text-cyber-purple text-xs transition-colors">Privacy Policy</a>
             <a href="#" className="text-cyber-light/60 hover:text-cyber-purple text-xs transition-colors">Terms of Service</a>

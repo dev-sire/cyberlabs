@@ -43,7 +43,7 @@ const CursorTrail: React.FC = () => {
         x: e.clientX,
         y: e.clientY,
         age: 0,
-        size: Math.random() * 3 + 1,
+        size: Math.random() * 4 + 1,
         color: `rgba(155, 135, 245, ${Math.random() * 0.7 + 0.3})`
       });
       
