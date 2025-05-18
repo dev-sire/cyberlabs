@@ -45,7 +45,7 @@
   body {
     @apply bg-cyber-dark text-cyber-light antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
-    cursor: url("cursor.png"), pointer; 
+    cursor: url("cursor.png"), auto; 
   }
 
   a, button{
